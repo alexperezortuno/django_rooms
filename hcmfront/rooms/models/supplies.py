@@ -16,4 +16,4 @@ class Supplies(models.Model):
         ordering = ['created_at']
 
     def __str__(self):
-        self.title
+        return self.title

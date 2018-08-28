@@ -2,21 +2,29 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
 from .supplies import Supplies
+from .disponibilities import Disponibilities
 
 
-# Create your models here.
 class Rooms(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=70)
-    capacity = models.IntegerField(default=1)
+    max_capacity = models.IntegerField(default=1)
     supplies = models.ManyToManyField(Supplies, verbose_name='Supply', related_name='get_supplies')
-    from_date = models.DateTimeField()
-    to_date = models.DateTimeField()
-    status = models.ForeignKey(Supplies, on_delete=models.CASCADE, null=True)
+    disponiblity = models.ManyToManyField(Disponibilities,
+                                          verbose_name='Disponibility',
+                                          related_name='get_disponibilities')
+    status = models.BooleanField(default=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def dates_available(self):
+        try:
+            return ", ".join(['{day} - {f}:{t}'.format(day=f.day,
+                                                       f=f.from_date.strftime('%H:%M'),
+                                                       t=f.to_date.strftime('%H:%M')) for f in self.disponiblity.all()])
+        except Exception as err:
+            print(err)
+            return None
 
     class Meta:
         verbose_name = 'room'
@@ -24,4 +32,4 @@ class Rooms(models.Model):
         ordering = ['created_at']
 
     def __str__(self):
-        self.title
+        return self.title
