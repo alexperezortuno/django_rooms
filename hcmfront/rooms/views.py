@@ -17,7 +17,7 @@ class ReservListView(ListView):
 class ReservCreateView(CreateView):
     model = ReservRoom
     form_class = ReservRoomForm
-    success_url = reverse_lazy('rooms:reserv_list')
+    success_url = reverse_lazy('rooms:reserve_list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user

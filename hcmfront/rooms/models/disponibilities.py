@@ -17,4 +17,7 @@ class Disponibilities(models.Model):
         ordering = ['created_at']
 
     def __str__(self):
-        return self.day
+        return '{day}: {from_day} - {to_day}'.format(
+            day=self.day,
+            from_day=self.from_date.strftime('%H:%M'),
+            to_day=self.to_date.strftime('%H:%M'))
