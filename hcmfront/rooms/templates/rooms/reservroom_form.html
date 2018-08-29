@@ -1,0 +1,31 @@
+{% extends 'rooms/layouts/base.html' %}
+{% load common %}
+{% block title %}Reservs{% endblock %}
+
+{% block css %}
+{{ block.super }}
+<style>
+    body {
+        padding-top: 54px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% include 'rooms/layouts/navbar.html' %}
+<!-- container -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Create Reserv</h1>
+            <div class="col-6">
+                <form method="post">
+                    {{ form.as_p }}
+                    <input type="submit" value="Create" />
+                    {% csrf_token %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

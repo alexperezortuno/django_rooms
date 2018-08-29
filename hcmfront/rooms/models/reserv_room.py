@@ -21,6 +21,9 @@ class ReservRoom(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
+    #def save(self, *args, **kwargs):
+    # TODO: implement logic for verify if room reserve was created
+
     class Meta:
         verbose_name = 'reserv'
         verbose_name_plural = 'reservs'
