@@ -26,6 +26,11 @@ class ReservRoomForm(forms.ModelForm):
                     'class': 'form-control',
                 }
             ),
+            'status': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
         }
 
         labels = {
