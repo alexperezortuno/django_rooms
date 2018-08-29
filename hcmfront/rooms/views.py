@@ -15,7 +15,6 @@ class ReservListView(ListView):
 
 @method_decorator(staff_member_required, name='dispatch')
 class ReservCreateView(CreateView):
-    template_name = 'rooms/reservroom_form.html'
     model = ReservRoom
     form_class = ReservRoomForm
     success_url = reverse_lazy('rooms:reserv_list')
