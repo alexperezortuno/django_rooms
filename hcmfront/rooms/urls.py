@@ -1,8 +1,8 @@
 from django.conf.urls import url
-from . import views
+from .views import ReservListView
 
 app_name = 'rooms'
 
 urlpatterns = [
-    url('', views.index, name='index'),
+    url(r'^$', ReservListView.as_view(), name='reserv-list'),
 ]
