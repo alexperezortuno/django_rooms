@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from rooms.urls import urlpatterns
+
 
 urlpatterns = [
     url(r'^adminpanel/', admin.site.urls),
-    url('rooms/', include('rooms.urls', namespace='rooms')),
+    url(r'^reservs/', include(urlpatterns)),
 ]

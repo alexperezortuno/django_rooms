@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.views.generic.list import ListView
+from .models import ReservRoom
 
-from django.shortcuts import render
 
-
-def index(request):
-    return render('Hola', {})
+class ReservListView(ListView):
+    model = ReservRoom

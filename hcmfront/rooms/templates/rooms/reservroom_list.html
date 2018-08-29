@@ -1,0 +1,56 @@
+{% extends 'rooms/layouts/base.html' %}
+{% load common %}
+{% block title %}Reservs{% endblock %}
+
+{% block css %}
+{{ block.super }}
+<style>
+    body {
+        padding-top: 54px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% include 'rooms/layouts/navbar.html' %}
+<!-- container -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Reservs</h1>
+            <div class="row">
+            {% for reserv in object_list %}
+                <!-- card -->
+                <div class="col-3">
+                    {% if reserv.status.title == 'Reservada' %}
+                    {% set bg = 'primary' %}
+                    {% elif reserv.status.title == 'Disponible' %}
+                    {% set bg = 'success' %}
+                    {% elif reserv.status.title == 'No Disponible' %}
+                    {% set bg = 'secondary' %}
+                    {% elif reserv.status.title == 'Confirmada' %}
+                    {% set bg = 'danger' %}
+                    {% endif %}
+
+                    <div class="card text-white bg-{{ bg }} mb-3">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ reserv.room }}</h5>
+                        <p class="card-text">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-white bg-{{ bg }}">{{ reserv.hours.all.first.day }}</li>
+                                <li class="list-group-item text-white bg-{{ bg }}">From {{ reserv.hours.all.first.from_date }} To {{ reserv.hours.all.last.to_date }}</li>
+                            </ul>
+                        </p>
+                      </div>
+                    </div>
+                </div>
+                <!-- ./card -->
+            {% empty %}
+                <div class="col-lg">No reserv yet.</div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+{% endblock %}
